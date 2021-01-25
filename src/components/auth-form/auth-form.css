@@ -1,0 +1,15 @@
+.form {
+    /* max-width: 1000px; */
+    /* margin: auto; */
+    /* padding-top: 1rem; */
+    /* width: 50%;
+    height: 50%; */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.bottom {
+    margin-top: 20px;
+    color: #fff;
+}
