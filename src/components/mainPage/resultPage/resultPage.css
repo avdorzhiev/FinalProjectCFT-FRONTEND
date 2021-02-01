@@ -1,0 +1,19 @@
+.result-page {
+    display: grid;
+    width: 90vw;
+    margin: 50px auto;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-column-gap: 50px;
+    grid-row-gap: 80px;
+    justify-items: center; 
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.result {
+    position: absolute;
+    left: 15px;
+    top: -70px;
+}

@@ -1,0 +1,85 @@
+.card {
+    width: 90%;
+    height: 550px;
+    margin: 0;
+    background: var(--grayback);
+    border-radius: 10px;
+    overflow: hidden;  /* to crop image inside rounded div*/
+    position: relative;
+    max-width: 400px;
+    box-shadow: var(--shadow);
+    padding: 15px;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.card:hover .image {
+    transform: scale(1.1);
+}
+
+.card .image{
+    width: 100%;
+    vertical-align: middle;
+    object-fit: cover;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-width: 800px;
+    transition: transform 0.4s;
+}
+
+.card .image-box{
+    width: 100%;
+    overflow: hidden; 
+    height: 250px;
+    position: relative;
+    background: black;
+}
+
+.card .title {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: white;
+    transition: all 0.4s;
+}
+
+.card-title:hover{
+    text-decoration: underline;
+}
+
+.card .rating {
+    color: rgb(10, 177, 10);
+    font-weight: 500;
+    text-shadow: 1px 1px 0.7px rgba(0, 0, 0, 0.808);
+}
+
+.card .plot p{
+    color: rgba(255, 255, 255, 0.692);
+    padding: 0px 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+span {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.822);
+}
+
+.emptyLike {
+    width: 50px;
+    height: 50px;
+    right: 15px;
+    bottom: 15px;
+    position: absolute;
+}
+
+.redLike {
+    width: 50px;
+    height: 50px;
+    right: 15px;
+    bottom: 15px;
+    position: absolute;
+}

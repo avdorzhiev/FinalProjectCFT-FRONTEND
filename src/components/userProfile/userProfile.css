@@ -1,0 +1,10 @@
+.profile {
+    margin: auto;
+    text-align: center;
+}
+
+.profile .not-likes img {
+    width: 50%; 
+    height: 50%;
+    opacity: 0.9;
+}

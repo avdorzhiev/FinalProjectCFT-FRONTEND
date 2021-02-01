@@ -2,25 +2,40 @@ import React from 'react';
 
 import { withRouter } from 'react-router-dom';
 import './register-form.css'
+import usersRequest from '../../api/users';
 
-class RegisterForm extends React.Component {
+export class RegisterForm extends React.Component {
+    state = { incorrect: 'none', enter: 'none' };
 
-    state = { username: '', password: '', language: 'en' };
-
-    handleLogin = event => {
-        this.setState({ username: event.target.value })
-    }
-
-    handlePassword = event => {
-        this.setState({ password: event.target.value })
-    }
-
-    handleLanguage = event => {
-        this.setState({language: event.target.value});
-    }
+    inputNameRef = React.createRef();
+    inputPasswordRef = React.createRef();
+    inputPasswordAgainRef = React.createRef();
+    
 
     register = () => {
-        alert(`Welcome ${this.state.username} password: ${this.state.password} language: ${this.state.language}`)
+        const nameValue = this.inputNameRef.current.value;
+        const passwordValue1 = this.inputPasswordRef.current.value;
+        const passwordValue2 = this.inputPasswordAgainRef.current.value;
+
+        if (!nameValue || !passwordValue1 || !passwordValue2) {
+            this.setState({ enter: 'block' })
+            this.setState({ incorrect: 'none' })
+            return
+        } else {
+            this.setState({ enter: 'none' })
+        }
+
+        if (passwordValue1 !== passwordValue2) {
+            this.setState({ incorrect: 'block' })
+        } else {
+            this.setState({ incorrect: 'none' })
+            this.setState({ incorrect: 'none' })
+            usersRequest.post('', {id: Math.random().toString(36).substr(2, 9), username: nameValue, password: passwordValue2 })
+            .then(() => {
+                this.props.history.push('/')
+            }).catch(response => alert(`ERROR: ${response.status}`)
+            )
+        }
     }
 
     cancel = () => {
@@ -28,23 +43,26 @@ class RegisterForm extends React.Component {
     }
 
     render() {
-        const { username, password } = this.state;
-
         return (
-            <div className='container register'>
-                <div className='card'>
-                    <h1>Register Form</h1> 
+            <div>
+                <div className='back' />
+                <div className="filter" />
+                <div className="form">
+                    <h1>Register Form</h1>
                     <span>Enter name:</span>
-                    <input type='text' placeholder='name' value={username} onChange={this.handleLogin} />
+                    <input type='text' placeholder='name' required ref={this.inputNameRef} />
                     <span>Enter password:</span>
-                    <input type='password' placeholder='password' value={password} onChange={this.handlePassword} />
-                    <span>Select the language you want to learn:</span>
-                    <select placeholder='language' onChange={this.handleLanguage}>
-                        <option value='en'>English</option>
-                        <option value='ru'>Russian</option>
-                    </select>
+                    <input type='password' placeholder='password' required ref={this.inputPasswordRef} />
+                    <span>Enter password again:</span>
+                    <input type='password' placeholder='password again' required ref={this.inputPasswordAgainRef} />
+                    <div className='error' style={{display: this.state.incorrect}}>
+                        <p>Incorrect login or password!</p>
+                    </div>
+                    <div className='error' style={{display: this.state.enter}}>
+                        <p>Enter login and password!</p>
+                    </div>
                     <button className='btn' onClick={this.register}>Register Now</button>
-                    <button className='btn'onClick={this.cancel}>Cancel</button>
+                    <button className='btn' onClick={this.cancel}>Cancel</button>
                 </div>
             </div>
         )
